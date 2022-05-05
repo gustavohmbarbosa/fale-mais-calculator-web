@@ -1,4 +1,4 @@
-import { State } from './types'
+import { State } from './state-types'
 
 export const state = (): State => ({
   codes: []
