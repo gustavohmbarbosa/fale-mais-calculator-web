@@ -1,4 +1,4 @@
-import { MutationsInterface, Mutations } from './types'
+import { MutationsInterface, Mutations } from './mutations-types'
 
 export default {
   [Mutations.SET_CODES] (state, codes) {

@@ -35,7 +35,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import { mapState } from 'vuex'
-import { Actions } from '~/store/Codes/types'
+import { Actions } from '~/store/Codes/actions-types'
 
 export default Vue.extend({
   name: 'SearchArea',

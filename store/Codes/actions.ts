@@ -1,4 +1,5 @@
-import { ActionsInterface, Actions, Mutations } from './types'
+import { ActionsInterface, Actions } from './actions-types'
+import { Mutations } from './mutations-types'
 
 const actions = (): ActionsInterface => ({
   [Actions.GET_ALL_CODES] ({ commit }) {
