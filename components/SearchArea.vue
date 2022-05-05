@@ -3,10 +3,11 @@
     <div class="search-items">
       <div class="item origin">
         <label for="origin">Qual o DDD de onde você vai ligar?</label>
-        <select id="origin" class="text-black hover:border-gray border-black">
+        <select id="origin" v-model="origin" class="text-black hover:border-gray border-black">
           <option hidden />
-          <option>012</option>
-          <option>014</option>
+          <option v-for="code in codes" :key="code.id">
+            {{ code.code }}
+          </option>
         </select>
       </div>
 
@@ -33,9 +34,20 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import { mapState } from 'vuex'
+import { Actions } from '~/store/Codes/types'
 
 export default Vue.extend({
-  name: 'SearchArea'
+  name: 'SearchArea',
+  data () {
+    return {
+      origin: ''
+    }
+  },
+  computed: mapState('Codes', ['codes']),
+  created () {
+    this.$store.dispatch(`Codes/${Actions.GET_ALL_CODES}`)
+  }
 })
 </script>
 

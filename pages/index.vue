@@ -24,16 +24,20 @@ import Vue from 'vue'
 import PageHeader from '@/components/PageHeader.vue'
 import SearchArea from '@/components/SearchArea.vue'
 
+interface Head {
+  title: string
+}
+
 export default Vue.extend({
   name: 'IndexPage',
   components: {
     PageHeader,
     SearchArea
   },
-  created () {
-    this.$CodeService.get('/codes').then((res) => {
-      console.log(res)
-    })
+  head (): Head {
+    return {
+      title: 'FaleMais Calculator | Telzir'
+    }
   }
 })
 </script>
