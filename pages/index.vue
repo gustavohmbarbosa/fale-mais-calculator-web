@@ -29,6 +29,11 @@ export default Vue.extend({
   components: {
     PageHeader,
     SearchArea
+  },
+  created () {
+    this.$CodeService.get('/codes').then((res) => {
+      console.log(res)
+    })
   }
 })
 </script>
