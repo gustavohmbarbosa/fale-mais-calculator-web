@@ -13,10 +13,11 @@
 
       <div class="item destiny">
         <label for="destiny">Qual o DDD de destino?</label>
-        <select id="destiny" class="text-black hover:border-gray border-black">
+        <select id="destiny" v-model="destiny" class="text-black hover:border-gray border-black">
           <option hidden />
-          <option>012</option>
-          <option>014</option>
+          <option v-for="code in availableDestinationsByOriginCode" :key="code.id">
+            {{ code.code }}
+          </option>
         </select>
       </div>
 
@@ -34,19 +35,46 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { mapState } from 'vuex'
+import { mapMutations, mapActions } from 'vuex'
 import { Actions } from '~/store/Codes/actions-types'
+import { Mutations } from '~/store/Codes/mutations-types'
+import { Code } from '~/store/Codes/state-types'
 
 export default Vue.extend({
   name: 'SearchArea',
   data () {
     return {
-      origin: ''
+      origin: null as null|number,
+      destiny: null as null|number
     }
   },
-  computed: mapState('Codes', ['codes']),
+  computed: {
+    codes (): Code[] {
+      return this.$store.state.Codes.codes
+    },
+    availableDestinationsByOriginCode (): Code[] {
+      return this.$store.state.Codes.availableDestinationsByOriginCode
+    }
+  },
+  watch: {
+    origin (code) {
+      if (code) {
+        this.setOriginCode(code)
+        this.getAvailableDestinationsByOriginCode()
+      }
+    }
+  },
   created () {
-    this.$store.dispatch(`Codes/${Actions.GET_ALL_CODES}`)
+    this.getAllCodes()
+  },
+  methods: {
+    ...mapMutations('Codes', {
+      setOriginCode: Mutations.SET_ORIGIN_CODE
+    }),
+    ...mapActions('Codes', {
+      getAllCodes: Actions.GET_ALL_CODES,
+      getAvailableDestinationsByOriginCode: Actions.GET_AVAILABLE_DESTINATIONS_BY_ORIGIN_CODE
+    })
   }
 })
 </script>

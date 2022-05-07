@@ -6,6 +6,11 @@ const actions = (): ActionsInterface => ({
     this.$CodeService.get('/codes').then((response: any) => {
       commit(Mutations.SET_CODES, response.data)
     })
+  },
+  [Actions.GET_AVAILABLE_DESTINATIONS_BY_ORIGIN_CODE] ({ commit, state }) {
+    this.$CodeService.get(`/codes/${state.originCode}/available-destinations`).then((response: any) => {
+      commit(Mutations.SET_AVAILABLE_DESTINATIONS, response.data)
+    })
   }
 })
 

@@ -6,5 +6,7 @@ export interface Code {
 }
 
 export interface State {
-    codes: Code[]
+    codes: Code[],
+    originCode: null|number,
+    availableDestinationsByOriginCode: Code[],
 }
