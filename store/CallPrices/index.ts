@@ -1,5 +1,6 @@
 import { State } from './state-types'
 
 export const state = (): State => ({
-  callPrices: []
+  callPrices: [],
+  ratePerMinute: 0
 })

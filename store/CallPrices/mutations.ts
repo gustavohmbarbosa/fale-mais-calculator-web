@@ -1,7 +1,12 @@
 import { Mutations, MutationsInterface } from './mutations-types'
 
-export default {
+const mutations = (): MutationsInterface => ({
   [Mutations.SET_CALL_PRICES] (state, callPrices) {
     state.callPrices = callPrices
+  },
+  [Mutations.SET_RATE_PER_MINUTE] (state, rate) {
+    state.ratePerMinute = rate
   }
-} as MutationsInterface
+})
+
+export default mutations()
