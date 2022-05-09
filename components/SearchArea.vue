@@ -36,11 +36,12 @@
 <script lang="ts">
 import Vue from 'vue'
 import { mapMutations, mapActions, mapState } from 'vuex'
+import { Code } from '~/store/Codes/state-types'
 import { Actions as CodesActions } from '~/store/Codes/actions-types'
 import { Mutations as CodesMutations } from '~/store/Codes/mutations-types'
 import { Actions as CallPricesActions } from '~/store/CallPrices/actions-types'
 import { Mutations as CallPricesMutations } from '~/store/CallPrices/mutations-types'
-import { Code } from '~/store/Codes/state-types'
+import { Mutations as PlansMutations } from '~/store/Plans/mutations-types'
 
 export default Vue.extend({
   name: 'SearchArea',
@@ -62,6 +63,7 @@ export default Vue.extend({
   },
   watch: {
     origin (originCode) {
+      this.setPlans([])
       this.destiny = ''
       this.setRate(0)
       if (originCode) {
@@ -93,6 +95,9 @@ export default Vue.extend({
     ...mapMutations('CallPrices', {
       setRate: CallPricesMutations.SET_RATE_PER_MINUTE,
       setMinutes: CallPricesMutations.SET_MINUTES
+    }),
+    ...mapMutations('Plans', {
+      setPlans: PlansMutations.SET_PLANS
     }),
     ...mapActions('Codes', {
       getAllCodes: CodesActions.GET_ALL_CODES,
@@ -182,6 +187,10 @@ export default Vue.extend({
 
     .item {
       margin-bottom: 20px;
+    }
+
+    .search-area {
+      padding-top: 1rem;
     }
   }
 </style>

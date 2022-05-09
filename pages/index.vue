@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full lg:w-2/3 m-auto" @keypress.enter="calculate()">
+  <div class="w-full lg:w-2/3 m-auto p-4" @keypress.enter="calculate()">
     <PageHeader />
     <SearchArea />
     <button :disabled="!(minutes > 0)" @click="calculate()">
