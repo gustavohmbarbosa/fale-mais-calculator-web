@@ -1,6 +1,6 @@
-export default function ({ $axios }: any, inject: any) {
+export default function ({ $axios, $config }: any, inject: any) {
   const PlanService = $axios.create({
-    baseURL: `${process.env.API_URL}/${process.env.API_VERSION}`
+    baseURL: `${$config.apiUrl}/${$config.apiVersion}`
   })
 
   inject('PlanService', PlanService)
