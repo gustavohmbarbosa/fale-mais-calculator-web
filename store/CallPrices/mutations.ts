@@ -6,6 +6,9 @@ const mutations = (): MutationsInterface => ({
   },
   [Mutations.SET_RATE_PER_MINUTE] (state, rate) {
     state.ratePerMinute = rate
+  },
+  [Mutations.SET_MINUTES] (state, minutes) {
+    state.minutes = minutes
   }
 })
 

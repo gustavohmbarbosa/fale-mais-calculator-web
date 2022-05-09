@@ -11,5 +11,6 @@ export interface CallPrice {
 
 export interface State {
     callPrices: CallPrice[],
-    ratePerMinute: number
+    ratePerMinute: null|number,
+    minutes: null|number
 }

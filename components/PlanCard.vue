@@ -1,13 +1,13 @@
 <template>
   <div class="plan-card shadow-lg rounded-2xl bg-white dark:bg-gray-800 p-4">
     <p class="text-black dark:text-white text-3xl font-bold">
-      Plano X
+      {{ name }}
     </p>
     <p class="text-gray-500 dark:text-gray-300 text-sm mb-4">
-      60 minutos por mês
+      {{ minutes }} minutos por mês
     </p>
     <p class="text-black dark:text-white  text-3xl font-bold">
-      R$ 60,00
+      R$ {{ value }}
     </p>
     <p class="text-gray-500 dark:text-gray-300 text-sm mb-4">
       Por mês
@@ -16,7 +16,7 @@
       Assinar plano
     </button>
     <p class="mt-4">
-      sem o plano: <strong>R$ 260,00</strong>
+      sem o plano: <strong>R$ {{ vanillaValue }}</strong>
     </p>
   </div>
 </template>
@@ -25,7 +25,25 @@
 import Vue from 'vue'
 
 export default Vue.extend({
-  name: 'PlanCard'
+  name: 'PlanCard',
+  props: {
+    name: {
+      type: String,
+      required: true
+    },
+    minutes: {
+      type: Number,
+      required: true
+    },
+    value: {
+      type: String,
+      required: true
+    },
+    vanillaValue: {
+      type: String,
+      required: true
+    }
+  }
 })
 </script>
 

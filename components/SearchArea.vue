@@ -28,7 +28,7 @@
 
     <div class="item minutes">
       <label for="minutes">Quantos minutos você pretende usar? </label>
-      <input id="minutes" class="text-black hover:border-gray border-black">
+      <input id="minutes" v-model="minutes" type="number" min="0" class="text-black hover:border-gray border-black">
     </div>
   </div>
 </template>
@@ -37,8 +37,9 @@
 import Vue from 'vue'
 import { mapMutations, mapActions, mapState } from 'vuex'
 import { Actions as CodesActions } from '~/store/Codes/actions-types'
+import { Mutations as CodesMutations } from '~/store/Codes/mutations-types'
 import { Actions as CallPricesActions } from '~/store/CallPrices/actions-types'
-import { Mutations } from '~/store/Codes/mutations-types'
+import { Mutations as CallPricesMutations } from '~/store/CallPrices/mutations-types'
 import { Code } from '~/store/Codes/state-types'
 
 export default Vue.extend({
@@ -46,7 +47,8 @@ export default Vue.extend({
   data () {
     return {
       origin: '',
-      destiny: ''
+      destiny: '',
+      minutes: null as null|number
     }
   },
   computed: {
@@ -61,6 +63,7 @@ export default Vue.extend({
   watch: {
     origin (originCode) {
       this.destiny = ''
+      this.setRate(0)
       if (originCode) {
         this.setOriginCode(originCode)
         this.getAvailableDestinationsByOriginCode()
@@ -74,6 +77,9 @@ export default Vue.extend({
           destiny: destinyCode
         })
       }
+    },
+    minutes (value) {
+      this.setMinutes(value)
     }
   },
   created () {
@@ -81,8 +87,12 @@ export default Vue.extend({
   },
   methods: {
     ...mapMutations('Codes', {
-      setOriginCode: Mutations.SET_ORIGIN_CODE,
-      setDestinyCode: Mutations.SET_DESTINY_CODE
+      setOriginCode: CodesMutations.SET_ORIGIN_CODE,
+      setDestinyCode: CodesMutations.SET_DESTINY_CODE
+    }),
+    ...mapMutations('CallPrices', {
+      setRate: CallPricesMutations.SET_RATE_PER_MINUTE,
+      setMinutes: CallPricesMutations.SET_MINUTES
     }),
     ...mapActions('Codes', {
       getAllCodes: CodesActions.GET_ALL_CODES,
@@ -152,6 +162,17 @@ export default Vue.extend({
     outline: none;
     margin: 0;
     max-width: 45px;
+  }
+
+  input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+
+  }
+
+  input[type=number] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+
   }
 
   @media screen and (max-width: 900px) {
